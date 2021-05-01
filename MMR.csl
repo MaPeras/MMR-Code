@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.1" class="note" default-locale="de-DE">
+  <info>
+    <title>MMR Zeitschrift für IT-Recht und Recht der Digitalisierung</title>
+    <title-short>MMR</title-short>
+    <id>http://www.zotero.org/styles/juristischer-zitierweise-offentliches-recht</id>
+    <link rel="self" href="http://www.zotero.org/styles/juristischer-zitierweise-offentliches-recht"/>
+    <link href="https://www.zotero.org/styles/juristische-zitierweise" rel="template"/>
+    <link href="" rel="documentation"/>
+    <author>
+      <name>Maximilian Petras</name>
+    </author>
+    <category citation-format="note" field="law"/>
+    <summary>Style for German law magazine MMR</summary>
+    <updated>2021-05-01T18:46:17+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <locale xml:lang="de-DE">
+    <terms>
+      <term name="accessed">besucht am</term>
+    </terms>
+  </locale>
+  <macro name="author">
+    <names variable="author" font-style="italic">
+      <name font-style="italic" delimiter=" / " name-as-sort-order="all"/>
+      <label form="short" prefix=" (" suffix=")"/>
+      <substitute>
+        <names variable="editor"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="author-note">
+    <names variable="author" font-style="italic">
+      <name form="short" font-style="italic" delimiter="/" et-al-min="3" et-al-use-first="1" name-as-sort-order="all"/>
+    </names>
+  </macro>
+  <macro name="locator-with-label">
+    <group delimiter=" ">
+      <label variable="locator" form="symbol"/>
+      <text variable="locator"/>
+    </group>
+  </macro>
+  <macro name="autor-editor-note">
+    <names variable="author" font-style="italic">
+      <name form="short" font-style="italic" delimiter="/" et-al-min="3" et-al-use-first="1" sort-separator=""/>
+      <substitute>
+        <names variable="editor" font-style="italic"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="inbook">
+    <choose>
+      <else-if match="any" position="near-note">
+        <text macro="first-note-reference"/>
+      </else-if>
+      <else>
+        <group delimiter=" ">
+          <text term="in" suffix=":"/>
+          <group>
+            <text variable="container-title" prefix=" "/>
+            <text macro="edition"/>
+          </group>
+        </group>
+      </else>
+    </choose>
+  </macro>
+  <macro name="firstpage-locator">
+    <group delimiter=" ">
+      <text variable="page-first"/>
+      <text variable="locator" prefix="(" suffix=")"/>
+    </group>
+  </macro>
+  <macro name="edition">
+    <choose>
+      <if match="any" is-numeric="edition">
+        <group delimiter=" ">
+          <number prefix=", " suffix=" " variable="edition" form="ordinal"/>
+          <text term="edition" form="short"/>
+        </group>
+        <date date-parts="year" form="text" variable="issued" prefix=" "/>
+      </if>
+      <else>
+        <date date-parts="year" form="text" variable="issued" prefix=" "/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="inarticle">
+    <group delimiter=" ">
+      <text variable="container-title" form="short"/>
+      <date date-parts="year" form="text" variable="issued"/>
+    </group>
+  </macro>
+  <macro name="inmagazine">
+    <choose>
+      <if match="any" position="ibid">
+        <text macro="Ebenda"/>
+      </if>
+      <else-if match="any" position="near-note">
+        <text macro="first-note-reference"/>
+      </else-if>
+      <else>
+        <group delimiter=" ">
+          <text variable="title" suffix=","/>
+          <text variable="container-title" form="short"/>
+          <text variable="volume"/>
+          <date date-parts="year" form="text" variable="issued" prefix="(" suffix=")"/>
+        </group>
+      </else>
+    </choose>
+  </macro>
+  <macro name="inmonograph">
+    <choose>
+      <if match="any" position="near-note">
+        <text macro="first-note-reference"/>
+      </if>
+      <else>
+        <text variable="title"/>
+        <text macro="edition"/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="URL">
+    <choose>
+      <if match="any" variable="note">
+        <text variable="URL" font-style="italic"/>
+      </if>
+    </choose>
+  </macro>
+  <macro name="Ebenda">
+    <text value="ebd."/>
+  </macro>
+  <macro name="first-note-reference">
+    <text value="o. Fußn." prefix=" ("/>
+    <text variable="first-reference-note-number" form="short" prefix=" " suffix="),"/>
+  </macro>
+  <citation near-note-distance="500">
+    <layout delimiter="; " suffix=".">
+      <choose>
+        <if type="article-journal">
+          <group delimiter=", ">
+            <text macro="author-note" font-style="italic"/>
+            <text macro="inarticle"/>
+            <group delimiter=" ">
+              <text variable="page-first"/>
+              <text variable="locator" prefix="(" suffix=")"/>
+            </group>
+          </group>
+        </if>
+        <else-if type="article-magazine" match="all" variable="volume">
+          <group delimiter=", ">
+            <text macro="author-note"/>
+            <text macro="inmagazine"/>
+            <group delimiter=" ">
+              <text variable="page-first"/>
+              <text variable="locator" prefix="(" suffix=")"/>
+            </group>
+          </group>
+        </else-if>
+        <else-if type="book">
+          <group delimiter=", ">
+            <text macro="autor-editor-note"/>
+            <text macro="inmonograph"/>
+            <text macro="locator-with-label"/>
+          </group>
+        </else-if>
+        <else-if type="chapter">
+          <group delimiter=", ">
+            <text macro="author-note"/>
+            <text macro="inbook"/>
+            <text macro="locator-with-label"/>
+          </group>
+        </else-if>
+        <else-if type="entry-encyclopedia">
+          <group delimiter=", ">
+            <text macro="author-note"/>
+            <choose>
+              <else-if match="any" position="near-note">
+                <text macro="first-note-reference"/>
+              </else-if>
+              <else>
+                <group>
+                  <text value="in: " prefix=" "/>
+                  <text variable="container-title" form="short" suffix=", "/>
+                  <text variable="collection-number" suffix=", "/>
+                  <group suffix=", ">
+                    <number suffix=" " variable="edition" form="ordinal"/>
+                    <text term="edition" form="short"/>
+                    <date date-parts="year" form="text" variable="issued" prefix=" "/>
+                  </group>
+                  <text variable="title" form="short" suffix=","/>
+                </group>
+              </else>
+            </choose>
+          </group>
+        </else-if>
+        <else-if type="legal_case" match="any">
+          <group delimiter=" ">
+            <text variable="authority" form="short" suffix=","/>
+            <text variable="references"/>
+            <text variable="locator" prefix="(" suffix=")"/>
+            <text variable="abstract"/>
+            <text variable="title-short" prefix=" – "/>
+          </group>
+        </else-if>
+        <else-if type="webpage" match="any">
+          <group delimiter=", ">
+            <text macro="author-note"/>
+            <choose>
+              <else-if match="any" position="near-note">
+                <text macro="first-note-reference"/>
+              </else-if>
+              <else>
+                <group>
+                  <text variable="title"/>
+                  <text variable="URL" prefix=", abrufbar unter "/>
+                </group>
+              </else>
+            </choose>
+          </group>
+        </else-if>
+        <else>
+          <group delimiter=", ">
+            <text macro="author-note"/>
+            <text variable="title"/>
+            <text macro="locator-with-label"/>
+          </group>
+        </else>
+      </choose>
+    </layout>
+  </citation>
+</style>
